@@ -1,0 +1,9 @@
+version: "3"
+services:
+  pushgateway:
+    container_name: pushgateway
+    image: prom/pushgateway:latest
+    ports:
+      - "9091:9091"
+#    depends_on:
+#      - prometheus

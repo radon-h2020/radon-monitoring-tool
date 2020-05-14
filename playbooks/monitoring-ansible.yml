@@ -21,18 +21,18 @@
 
     - name: Git checkout monitoring stack repository
       git:
-        repo: 'https://github.com/giopnd/monitoring-stack.git'
+        repo: 'https://github.com/radon-h2020/radon-monitoring-tool.git'
         dest: "{{ repo_folder }}"
     #        version: latest
 
     - name: Tear down services
       docker_compose:
-        project_src: "{{ repo_folder }}"
+        project_src: "{{ repo_folder }}"/docker-compose-scripts
         state: absent
 
     - name: Start services
       docker_compose:
-        project_src: "{{ repo_folder }}"
+        project_src: "{{ repo_folder }}"/docker-compose-scripts
         state: present
       register: output
 
