@@ -11,3 +11,8 @@ scrape_configs:
     consul_sd_configs:
       - server: '3.127.254.144:8500'
         services: []
+
+
+#    static_configs:
+#      - targets:
+#          - "1.2.3.4:8080"
