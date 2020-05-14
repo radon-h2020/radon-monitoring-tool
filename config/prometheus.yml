@@ -1,0 +1,13 @@
+---
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'self'
+
+    honor_labels: true
+
+    consul_sd_configs:
+      - server: '3.127.254.144:8500'
+        services: []
