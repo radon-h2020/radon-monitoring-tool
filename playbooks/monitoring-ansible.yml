@@ -27,12 +27,12 @@
 
     - name: Tear down services
       docker_compose:
-        project_src: "{{ repo_folder }}"/docker-compose-scripts
+        project_src: "{{ repo_folder }}"
         state: absent
 
     - name: Start services
       docker_compose:
-        project_src: "{{ repo_folder }}"/docker-compose-scripts
+        project_src: "{{ repo_folder }}"
         state: present
       register: output
 
@@ -56,5 +56,5 @@
         service_name: push_gateway
         service_port: 9091
         # should automatically get IP of remote host
-        service_address: '3.120.138.146'
+        service_address: ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0])
         host: 3.127.254.144:8500
