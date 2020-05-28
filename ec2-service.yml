@@ -98,7 +98,7 @@ node_types:
     artifacts:
       create:
         type: radon.artifacts.Ansible
-        file: ec2/create.yml
+        file: create/create.yml
       delete:
         type: radon.artifacts.Ansible
-        file: ec2/delete.yml
+        file: delete/delete.yml
