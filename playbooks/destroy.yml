@@ -1,0 +1,50 @@
+---
+- name: Run RADON monitoring stack
+  hosts: remote
+  become: true
+  #  connection: local
+  vars:
+    repo_folder: /tmp/checkout
+
+  tasks:
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+
+    - name: Install docker module for python
+      pip:
+        name: docker
+
+    - name: Install docker compose module for python
+      pip:
+        name: docker-compose
+
+    - name: Git checkout monitoring stack repository
+      git:
+        repo: 'https://github.com/radon-h2020/radon-monitoring-tool.git'
+        dest: "{{ repo_folder }}"
+    #        version: latest
+
+    - name: Tear down services
+      docker_compose:
+        project_src: "{{ repo_folder }}"
+        state: absent
+
+    - debug:
+        var: output
+
+    - assert:
+        that:
+          - "pushgateway.pushgateway.state.running"
+
+    - name: Install consul module for python
+      pip:
+        name: python-consul
+
+#    - name: unregister push gateway service from the RADON consul agent
+#      consul:
+#        service_name: push_gateway
+#        service_port: 9091
+#        # should automatically get IP of remote host
+#        service_address: '3.120.138.146'
+#        host: '3.127.254.144:8500'
