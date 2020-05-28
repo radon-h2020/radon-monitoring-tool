@@ -26,7 +26,7 @@ topology_template:
         private_address: localhost
         public_address: localhost
 
-    hello:
+    monitoring:
       type: monitoring_type
       requirements:
         - host: my-workstation
