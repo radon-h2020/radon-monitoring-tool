@@ -1,6 +1,6 @@
 ---
 - name: Run RADON monitoring stack
-  hosts: remote
+  hosts: all
   become: true
   #  connection: local
   vars:

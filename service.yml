@@ -1,17 +1,16 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  monitoring_type:
+
+  monitoring_tool:
     derived_from: tosca.nodes.SoftwareComponent
     interfaces:
       Standard:
-        #        inputs:
-        #          marker:
-        #            default: { get_input: marker }
-        #            type: string
+        type: tosca.interfaces.node.lifecycle.Standard
         operations:
           create: playbooks/create.yml
           delete: playbooks/destroy.yml
+
 
 topology_template:
   #  inputs:
@@ -27,6 +26,6 @@ topology_template:
         public_address: localhost
 
     monitoring:
-      type: monitoring_type
+      type: monitoring_tool
       requirements:
         - host: my-workstation
