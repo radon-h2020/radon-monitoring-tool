@@ -11,7 +11,7 @@ node_types:
         #            type: string
         operations:
           create: playbooks/create.yml
-          delete: playbooks/delete.yml
+          delete: playbooks/destroy.yml
 
 topology_template:
   #  inputs:
