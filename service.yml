@@ -13,17 +13,13 @@ node_types:
 
 
 topology_template:
-  #  inputs:
-  #    marker:
-  #      type: string
-  #      default: default-marker
 
   node_templates:
     my-workstation:
       type: tosca.nodes.Compute
       attributes:
-        private_address: localhost
-        public_address: localhost
+        private_address: 172.31.38.115
+        public_address: 3.120.138.146
 
     monitoring:
       type: monitoring_tool
