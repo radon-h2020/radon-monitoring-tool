@@ -10,8 +10,8 @@ node_types:
         #            default: { get_input: marker }
         #            type: string
         operations:
-          create: playbooks/create.yaml
-          delete: playbooks/delete.yaml
+          create: playbooks/create.yml
+          delete: playbooks/delete.yml
 
 topology_template:
   #  inputs:
