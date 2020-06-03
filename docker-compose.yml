@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 services:
   mtail_exporter:
     container_name: mtail_exporter
