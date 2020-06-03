@@ -4,6 +4,7 @@
   become: true
   vars:
     repo_folder: /tmp/checkout
+    mtail_repo_folder: /tmp/mtail
 
   tasks:
     - name: Install required system packages
@@ -17,6 +18,18 @@
     - name: Install docker compose module for python
       pip:
         name: docker-compose
+
+    - name: Git checkout Google mtail repository
+        git:
+          repo: 'https://github.com/google/mtail.git'
+          dest: "{{ mtail_repo_folder }}"
+#            version: latest
+
+    - name: Build mtail docker image
+        docker_image:
+          name: mtail:latest
+          build:
+            path: "{{ mtail_repo_folder }}"
 
     - name: Git checkout monitoring stack repository
       git:
