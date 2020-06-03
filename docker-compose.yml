@@ -15,5 +15,5 @@ services:
         target: /logs
       #        readonly: true
       - type: bind
-        source: ~/gauge.mtail
+        source: gauge.mtail
         target: /progs/gauge.mtail
