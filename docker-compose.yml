@@ -10,10 +10,13 @@ services:
     #      -logtostderr
     #      -one_shot
     volumes:
-      - type: bind
-        source: /tmp
-        target: /logs
-      #        readonly: true
-      - type: bind
-        source: gauge.mtail
-        target: /progs/gauge.mtail
+      - /tmp:/logs
+
+      - ./gauge.mtail:/progs/gauge.mtail
+#      - type: bind
+#        source: /tmp
+#        target: /logs
+#      #        readonly: true
+#      - type: bind
+#        source: gauge.mtail
+#        target: /progs/gauge.mtail
