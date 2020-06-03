@@ -1,0 +1,6 @@
+gauge val_acc
+
+/validation accuracy (\d+)/ {
+  # Parse log record and export validation accuracy value.
+  val_acc = $1
+}
