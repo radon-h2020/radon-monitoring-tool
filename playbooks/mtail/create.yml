@@ -20,16 +20,16 @@
         name: docker-compose
 
     - name: Git checkout Google mtail repository
-        git:
-          repo: 'https://github.com/google/mtail.git'
-          dest: "{{ mtail_repo_folder }}"
+      git:
+        repo: 'https://github.com/google/mtail.git'
+        dest: "{{ mtail_repo_folder }}"
 #            version: latest
 
     - name: Build mtail docker image
-        docker_image:
-          name: mtail:latest
-          build:
-            path: "{{ mtail_repo_folder }}"
+      docker_image:
+        name: mtail:latest
+        build:
+          path: "{{ mtail_repo_folder }}"
 
     - name: Git checkout monitoring stack repository
       git:
