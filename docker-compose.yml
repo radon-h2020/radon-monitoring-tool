@@ -1,9 +1,19 @@
-version: '3'
+version: '3.8'
 services:
-  pushgateway:
-    container_name: pushgateway
-    image: prom/pushgateway:latest
+  mtail_exporter:
+    container_name: mtail_exporter
+    image: mtail:latest
     ports:
-      - "9091:9091"
-#    depends_on:
-#      - prometheus
+      - "3903:3903"
+    command:
+      "-logtostderr --progs /progs/gauge.mtail --logs /logs/foo.log --poll_interval 250ms"
+    #      -logtostderr
+    #      -one_shot
+    volumes:
+      - type: bind
+        source: /tmp
+        target: /logs
+      #        readonly: true
+      - type: bind
+        source: ~/gauge.mtail
+        target: /progs/gauge.mtail

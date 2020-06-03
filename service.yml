@@ -8,8 +8,8 @@ node_types:
       Standard:
         type: tosca.interfaces.node.lifecycle.Standard
         operations:
-          create: playbooks/create.yml
-          delete: playbooks/destroy.yml
+          create: playbooks/mtail/create.yml
+          delete: playbooks/mtail/destroy.yml
 
 
 topology_template:
