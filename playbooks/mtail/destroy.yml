@@ -26,9 +26,9 @@
     #        version: latest
 
     - name: Tear down services
-        docker_compose:
-          project_src: "{{ repo_folder }}"
-          state: absent
+      docker_compose:
+        project_src: "{{ repo_folder }}"
+        state: absent
 
     #    - name: Install consul module for python
     #      pip:
