@@ -63,5 +63,5 @@
         service_name: mtail_exporter
         service_port: 3903
         # should automatically get IP of remote host
-        service_address: '3.120.138.146'
+        service_address: '52.59.205.49'
         host: '3.127.254.144'
