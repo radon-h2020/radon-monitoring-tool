@@ -39,3 +39,34 @@ The dependencies can be provided to AWS Lambda via layer like:
  or packaged with the lambda code or simply reference a public layer: `arn:aws:lambda:eu-central-1:510790361559:layer:radon_monitoring_client:2`  
  
 The RADON monitoring client needs to be registered to its corresponding push gateway. This is achieved by injectng an Environment variable to the AWS Lambda function with key: `PUSH_GATEWAY_HOST`. 
+
+
+# Monitoring & extracting metrics from application logs
+
+Extracting Prometheus metrics from application logs is supported in RADON using Google's [mtail](https://github.com/google/mtail) tool. 
+mtail acts as a Prometheus exporter so it is fully compliant with the RADON Monitoring tool which is based on Prometheus toolkit.
+A TOSCA service template for deploying the mtail component and transparently integrate it to the RADON central Prometheus server is available
+at https://github.com/radon-h2020/radon-monitoring-tool/blob/master/service.yml. It can be deployed with the RADON xOpera orchestrator on any server running a Docker runtime, as usual::
+
+  ```
+  $ OPERA_SSH_USER=xxx opera deploy service.yml
+  ```
+
+In terms of configuration needed, a user should specify the path of the log file to be monitored/analysed in the command of the corresponding docker compose file (--logs)::
+
+  ```command:
+    "-logtostderr --progs /progs/gauge.mtail --logs /logs/foo.log --poll_interval 250ms"
+  ```
+
+mtail continuously tails and parses the log file and on each log record it applies a RegEx rule to extract the monitoring metrics of interest. A sample mtail config file is available at: https://github.com/radon-h2020/radon-monitoring-tool/blob/master/gauge.mtail.
+
+  ```gauge val_acc
+
+  /validation accuracy (\d+)/ {
+    # Parse log record and export validation accuracy value.
+    val_acc = $1
+  }
+  ```
+
+It filters log records containing the pattern: 'validation accuracy (\d+)' and exposes the value to the Prometheus and consequently to the Grafana for visualization of the monitored metrics.
+Please refer to mtail's [Programming Guide](https://github.com/google/mtail/blob/master/docs/Programming-Guide.md) for details.
