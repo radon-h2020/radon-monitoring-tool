@@ -7,16 +7,7 @@ services:
       - "3903:3903"
     command:
       "-logtostderr --progs /progs/gauge.mtail --logs /logs/foo.log --poll_interval 250ms"
-    #      -logtostderr
-    #      -one_shot
     volumes:
       - /tmp:/logs
 
       - ./gauge.mtail:/progs/gauge.mtail
-#      - type: bind
-#        source: /tmp
-#        target: /logs
-#      #        readonly: true
-#      - type: bind
-#        source: gauge.mtail
-#        target: /progs/gauge.mtail
