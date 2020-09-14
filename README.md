@@ -31,12 +31,16 @@ To monitor an AWS Lambda function import the RADON monitoring lib and simply ann
 > @monitor_ram  
 > @monitor_cpu
 
-The dependencies can be provided to AWS Lambda via layer like:  
-`$ pip install --target ./package/python prometheus_pushgateway`  
+Package the monitoring lib dependencies in the AWS Lambda deployment package:  
+`$ pip install --target ./python prometheus-client psutil`  
+`$ zip -r9 function.zip ./python/`  
+
+Alternatively, the dependencies can be provided to AWS Lambda as layer dependency like:  
+`$ pip install --target ./package/python prometheus-client`  
 `$ pip install --target ./package/python psutil`  
 `$ zip -r9 function.zip package/`  
 `$ aws lambda publish-layer-version --layer-name monitoring_client --zip-file fileb://function.zip --compatible-runtimes ruby2.5`  
- or packaged with the lambda code or simply reference a public layer: `arn:aws:lambda:eu-central-1:510790361559:layer:radon_monitoring_client:2`  
+A public layer that contains the RADON Monitoring lib is publickly available: `arn:aws:lambda:eu-central-1:510790361559:layer:radon_monitoring_client:2`  
  
 The RADON monitoring client needs to be registered to its corresponding push gateway. This is achieved by injectng an Environment variable to the AWS Lambda function with key: `PUSH_GATEWAY_HOST`. 
 
