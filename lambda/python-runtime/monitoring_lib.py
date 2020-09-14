@@ -41,7 +41,6 @@ def collect_push_metrics_ram(event, context):
 
     ram = psutil.virtual_memory()
     ram_metric.set(ram.used)
-    print(ram.used)
 
     push_to_gateway(push_gateway_host, job=context.function_name + '_ram',
                     registry=registry)
