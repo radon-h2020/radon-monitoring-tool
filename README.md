@@ -32,7 +32,7 @@ To monitor an AWS Lambda function import the RADON monitoring lib and simply ann
 > @monitor_cpu
 
 Package the monitoring lib dependencies in the AWS Lambda deployment package:  
-`$ pip install --target ./python prometheus-client psutil`  
+`$ pip install --target ./ prometheus-client psutil`  
 `$ zip -r9 function.zip ./python/`  
 
 Alternatively, the dependencies can be provided to AWS Lambda as layer dependency like:  
